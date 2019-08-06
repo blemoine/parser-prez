@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "build:peg": "pegjs ./src/parser-peg.pegjs",
+    "build": "npm run build:peg",
+    "test": "npm run build && jest"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,7 @@
     "prettier": "^1.18.2"
   },
   "dependencies": {
-    "parsimmon": "^1.13.0"
+    "parsimmon": "^1.13.0",
+    "pegjs": "^0.10.0"
   }
 }

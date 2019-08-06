@@ -1,6 +1,9 @@
 const P = require('parsimmon');
 
 const language = {
+  Null() {
+    return P.alt(P.string('null').result(null))
+  },
   Number() {
     return P.regexp(/-?[1-9]*[0-9]+(\.[0-9]+)?/)
       .map((str) => parseFloat(str))
@@ -41,7 +44,7 @@ const language = {
   },
 
   Json(r) {
-    return P.alt(r.Number, r.Boolean, r.String, r.Array, r.Object);
+    return P.alt(r.Null, r.Number, r.Boolean, r.String, r.Array, r.Object);
   },
 };
 

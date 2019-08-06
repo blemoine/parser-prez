@@ -1,11 +1,12 @@
 const data = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
 const parsers = require('./parser');
 
-
 ['parsimmon'].forEach((parserType) => {
   const parse = parsers(parserType);
   describe(`parser ${parserType}`, () => {
-
+    it('should parse null', () => {
+      expect(parse('null')).toEqual(null);
+    });
     it('should parse boolean', () => {
       expect(parse('false')).toEqual(false);
       expect(parse('true')).toEqual(true);
@@ -29,10 +30,10 @@ const parsers = require('./parser');
     it('should parse object', () => {
       expect(parse('{}')).toEqual({});
       expect(parse('{"a":1, "b": false, "c": "test", "d": [12]}')).toEqual({ a: 1, b: false, c: 'test', d: [12] });
-      expect(parse('{"a":{"d":1}, "b":{"e":{"f":false}}, "d":[12, {} , {"y":"u"}]}')).toEqual({
+      expect(parse('{"a":{"d":1}, "b":{"e":{"f":false}}, "d":[12, {} , {"y":"u"}, null]}')).toEqual({
         a: { d: 1 },
         b: { e: { f: false } },
-        d: [12, {}, { y: 'u' }],
+        d: [12, {}, { y: 'u' }, null],
       });
     });
   });
