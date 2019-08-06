@@ -10,7 +10,9 @@ array "array" = "[" ws* values:(head:json tail:(( ws* "," ws* v:json {return v})
   return values === null? []:values
 }
 
-number "number" = "-"? ("0" / ([1-9] [0-9]*)) ("." [0-9]+)? { return parseFloat(text()) }
+number "number" = "-"? integer ("." [0-9]+)? { return parseFloat(text()) }
+
+integer = "0" / ([1-9] [0-9]*) { return text() }
 
 string "string" = '"' chars:[^\0-\x1F\x22\x5C]* '"' { return chars.join(""); }
 

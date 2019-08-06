@@ -12,6 +12,7 @@ const parsers = require('./parser');
       expect(parse('true')).toEqual(true);
     });
     it('should parse number', () => {
+      expect(parse('0')).toEqual(0);
       expect(parse('1')).toEqual(1);
       expect(parse('-2')).toEqual(-2);
       expect(parse('203.3456')).toEqual(203.3456);

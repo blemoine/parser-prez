@@ -2,7 +2,7 @@ const P = require('parsimmon');
 
 const language = {
   Null() {
-    return P.alt(P.string('null').result(null))
+    return P.string('null').result(null);
   },
   Number() {
     return P.regexp(/-?[1-9]*[0-9]+(\.[0-9]+)?/)
@@ -22,15 +22,8 @@ const language = {
     );
   },
   Object(r) {
-    return P.sepBy(
-      P.seq(
-        r.String.skip(P.optWhitespace)
-          .skip(P.string(':'))
-          .skip(P.optWhitespace),
-        r.Json
-      ),
-      P.string(',').trim(P.optWhitespace)
-    )
+    const member = P.seq(r.String.skip(P.string(':').trim(P.optWhitespace)), r.Json);
+    return P.sepBy(member, P.string(',').trim(P.optWhitespace))
       .wrap(P.string('{').skip(P.optWhitespace), P.optWhitespace.then(P.string('}')))
       .map((arr) =>
         arr.reduce(
