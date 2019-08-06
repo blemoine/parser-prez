@@ -13,7 +13,7 @@ const language = {
     return P.alt(P.string('false').result(false), P.string('true').result(true)).desc('boolean');
   },
   String() {
-    return P.regexp(/"((?:\\.|.)*?)"/, 1).desc('string');
+    return P.regexp(/"([^\0-\x1F\x22\x5C]*)"/, 1).desc('string');
   },
   Array(r) {
     return P.sepBy(r.Json, P.string(',').trim(P.optWhitespace)).wrap(
