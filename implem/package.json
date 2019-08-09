@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "build:nearley": "rm -rf src/jsonEarley.js && nearleyc src/jsonEarley.ne -o src/jsonEarley.js",
     "build:peg": "rm -rf src/parser-peg.js && pegjs ./src/parser-peg.pegjs",
     "build:antlr": "rm -rf src/antlr4 &&  java -jar $HOME/lib/antlr-4.7.2-complete.jar -Dlanguage=JavaScript -visitor -o src/antlr4 src/jsonAntlr.g4",
-    "build": "npm run build:peg && npm run build:antlr",
+    "build": "npm run build:peg && npm run build:antlr && npm run build:nearley",
     "test": "npm run build && jest"
   },
   "author": "",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "antlr4": "^4.7.2",
+    "nearley": "^2.18.0",
     "parsimmon": "^1.13.0",
     "pegjs": "^0.10.0"
   }

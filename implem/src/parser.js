@@ -1,6 +1,7 @@
 const parseParsimmon = require('./parser-parsimmon');
 const parsePeg = require('./parser-peg').parse;
 const parseAntlr4 = require('./parser-antlr4');
+const parseNearley = require('./parser-nearley');
 
 module.exports = function(parser) {
   if (parser === 'parsimmon') {
@@ -9,6 +10,8 @@ module.exports = function(parser) {
     return parsePeg;
   } else if (parser === 'antlr4') {
     return parseAntlr4;
+  } else if (parser === 'nearley') {
+    return parseNearley;
   } else {
     throw new Error(`${parser} is not supported`);
   }
