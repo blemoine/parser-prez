@@ -1,7 +1,7 @@
 const data = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
 const parsers = require('./parser');
 
-[/*'antlr4', 'parsimmon', 'peg', */'nearley'].forEach((parserType) => {
+['antlr4', 'parsimmon', 'peg', 'nearley', 'chevrotain'].forEach((parserType) => {
   const parse = parsers(parserType);
   describe(`parser ${parserType}`, () => {
     it('should parse null', () => {

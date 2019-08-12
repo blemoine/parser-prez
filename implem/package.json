@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "antlr4": "^4.7.2",
+    "chevrotain": "^5.0.0",
     "nearley": "^2.18.0",
     "parsimmon": "^1.13.0",
     "pegjs": "^0.10.0"
