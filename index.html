@@ -358,10 +358,8 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
         <section>
           <h2>Error handling</h2>
 
-          - dans le parser S'arrete a la premiere erreur ou pas ?
-          - dans le generator?
+          - dans le parser S'arrete a la premiere erreur ou pas ? - dans le generator?
         </section>
-
 
         <section>
           <h2>CST -> AST</h2>
@@ -371,23 +369,30 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
           </ul>
         </section>
 
-        <section>
+        <section style="position:relative">
           <h2>Famille de grammaire/algo</h2>
           <ul>
-            <li class="fragment">LL(1), LL(k), LL(*) -> ANTLR, javacc</li>
-            <li class="fragment">LR(1), LR(k) SLR(1), LALR(1) -> Bison, Jison</li>
-            <li class="fragment">Peg -> PegJs</li>
-            <li class="fragment">Earley -> Nearley</li>
+            <li>LL(1), LL(k), LL(*)</li>
+            <li>LR(1), LR(k) SLR(1), LALR(1)</li>
+            <li>Peg</li>
+            <li>Earley</li>
           </ul>
+          <div
+            class="fragment"
+            style="position:absolute; top:100px; color: #C00; font-size: 8rem;transform: rotate(-45deg); left: 0;"
+          >
+            On s'en moque
+          </div>
         </section>
 
         <section>
-          <h2>Famille de grammaire</h2>
-          <ul>
-            <li>LR et Earley et PEG supporte la récursion a gauche<sup>*</sup></li>
-            <li>LR et Earley sans ambiguités</li>
-            <li>Earley > LR > LL  en terme de langages pouvant être parsé</li>
-          </ul>
+          <h2>Example: Nearley</h2>
+          <p>Earley pour JavaScript, actions intégrées.</p>
+        </section>
+
+        <section>
+          <h2>Example: ANTLR</h2>
+          <p>LL(*), visitor</p>
         </section>
 
         <section>
@@ -403,21 +408,31 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
         </section>
 
         <section>
-          <h2>Comment choisir&nbsp;?</h2>
+          <h2>Conclusion - avez vous besoin d'un parser</h2>
 
-          Tester !
-          Montrer quelques examples genre ANTLR , nearley, et peg avec embeded action or not
-
-          - Ma grammaire est elle lisible ?
-          - Ma grammaire doit elle etre utilisable par different langage ?
-          -
-
+          <ul>
+            <li>Si vous avez déjà un parser composé de pleins de regex</li>
+            <li>Si vous vous appretez a présenter un format texte au end user (par ex liste de course)</li>
+          </ul>
         </section>
-
         <section>
-          <h2>Conclusion</h2>
+          <h2>Conclusion - quel parser choisir</h2>
 
-          // Scatter plot avec maintanbilité / perf // Gros tableau // Privilégier la maintenabilité
+          <ul>
+            <li>Tester les !</li>
+            <li class="fragment">Si simple et performance ne compte pas, parser combinator</li>
+            <li class="fragment">Si moins simple ou que les perfs sont importantes, parser generator</li>
+            <li class="fragment">Se focaliser sur la maintenabilité</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Famille de grammaire</h2>
+          <h3>Si vous voulez <em>vraiment</em> savoir</h3>
+          <ul>
+            <li>LR et Earley et PEG supporte la récursion a gauche<sup>*</sup></li>
+            <li>LR et Earley sans ambiguités</li>
+            <li>Earley > LR > LL en terme de langages pouvant être parsé</li>
+          </ul>
         </section>
       </div>
     </div>
