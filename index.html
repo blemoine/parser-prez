@@ -12,6 +12,7 @@
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css" />
 
     <!-- Printing and PDF exports -->
     <script>
@@ -31,6 +32,9 @@
         fill: white;
         font-size: 32px;
       }
+      .reveal code {
+        font-family: 'Fira Code', monospace;
+      }
 
       code.bordered {
         border: 1px solid white;
@@ -43,7 +47,8 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h1>Pourquoi et comment utiliser un parser&nbsp;?</h1>
+          <h1>Parsers</h1>
+          <h2>Comment exploiter efficacment du texte brut</h2>
         </section>
 
         <section>
@@ -51,7 +56,7 @@
           <ul style="display:inline-block;width:600px;vertical-align:top;position:relative;">
             <li>Benoît Lemoine</li>
             <li>
-              Développeur Fullstack <br />(TypeScript / Scala) <br />chez <a href="http://www.mnubo.com">mnubo</a> à
+              Développeur Fullstack <br />(TypeScript / Scala) <br />chez <a href="http://www.mnubo.com">Mnubo</a> à
               Montréal
             </li>
             <li><a href="https://twitter.com/benoit_lemoine">@benoit_lemoine</a></li>
@@ -62,7 +67,7 @@
             alt="Plus bel animal du monde, le Moloch"
           />
         </section>
-
+        <!--
         <section>
           <h2>Qu'est qu'un DSL&nbsp;?</h2>
           <ul>
@@ -72,11 +77,10 @@
             <li class="fragment">Par ex: SQL, markdown</li>
           </ul>
         </section>
-
+-->
         <section>
           <h2>Qu'est qu'un parser&nbsp;?</h2>
           <code class="fragment">String -> Concrete Syntax Tree </code>
-          <p class="fragment">syntaxe != sémantique</p>
         </section>
 
         <section>
@@ -143,13 +147,18 @@
             </div>
             <div class="fragment">
               <div>AST - Json</div>
-              <code style="font-size: 63%">['+', 1, ['*', 2, 3]]</code>
+              <code style="font-size: 63%; border: 1px solid white;padding:10px 0;">['+', 1, ['*', 2, 3]]</code>
             </div>
           </div>
         </section>
 
         <section>
-          <h2>Pourquoi&nbsp;?</h2>
+          <h2>Syntaxe <code>!=</code> Sémantique</h2>
+          <code>let x: boolean = 23;</code>
+        </section>
+
+        <section>
+          <h2>Quels cas d'utilisations?&nbsp&nbsp;?</h2>
           <ul>
             <li class="fragment">Faire des formules <em>à la excel</em></li>
             <li class="fragment">
@@ -157,7 +166,7 @@
             </li>
             <li class="fragment">Interface Utilisateur permettant de saisir des commandes (e.g. chat)</li>
             <li class="fragment">Valider (et simplifier) un fichier de configuration</li>
-            <li class="fragment">Créer son propre langage de programmation</li>
+            <li class="fragment">Créer son propre DSL (sql, markdown, coffeescript, ...)</li>
             <li class="fragment">etc.</li>
           </ul>
         </section>
@@ -253,6 +262,7 @@
             <li class="fragment">
               <code>-</code> Le moins maintenable <span class="fragment">(même si on fait l'effort)</span>
             </li>
+            <li class="fragment">par ex. le parser de C de Clang, le parser de Java de javac</li>
           </ul>
         </section>
 
@@ -289,8 +299,9 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
                 >, en particulier si on connait la programmation fonctionnelle</span
               >
             </li>
+              <li class="fragment"><code>+</code> "Facile" à debugger</li>
             <li class="fragment"><code>+</code> Pas d'étape de build intermédiaire</li>
-            <li class="fragment"><code>+</code> "Facile" à debugger</li>
+
             <li class="fragment"><code>-</code> Mauvaises performances</li>
             <li class="fragment"><code>-</code> Non portable</li>
           </ul>
@@ -308,7 +319,7 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
         <section>
           <h2>Le lexer</h2>
           <ul>
-            <li class="fragment">String -> List[Token] -> CST</li>
+              <li class="fragment"><code>String -> List[Token] -> CST</code></li>
             <li class="fragment">
               <code>
                 '["name", 12]' -> [LEFT_SQUARE_BRACKET, STRING("name"), COMMA, NUMBER(12), RIGHT_SQUARE_BRACKET]
@@ -366,7 +377,7 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
           <h2>Error handling</h2>
 
           <ul>
-            <li class="fragment">Le parser s'arrete t'il a la première erreur&nbsp;?</li>
+            <li class="fragment">Le parser s'arrete t'il à la première erreur&nbsp;?</li>
             <li class="fragment">
               Le parser remonte t'il des informations pertinentes (ce qu'il a vu, ce qu'il attendait)
             </li>
@@ -374,7 +385,7 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
         </section>
 
         <section>
-          <h2>CST -> AST</h2>
+            <h2><code>CST -> AST</code></h2>
           <ul>
             <li class="fragment">Visitor - langage agnostique</li>
             <li class="fragment">Actions intégrées - plus proche de la grammaire</li>
