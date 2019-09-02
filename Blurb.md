@@ -1,15 +1,12 @@
-Pourquoi et comment utiliser un parser ?
+Parsers: exploiter efficacement du texte brut
 ===
 
 V2
 
 
+Le parsing de texte est un problème théoriquement résolu depuis plus de 40 ans. Mais les aspects pratiques sont encore très complexes à mettre en oeuvre.
+Au cours de cette présentation agnostique de toute technologie et langage, vous aurez l'occasion de découvrir ce que sont les parsers, quels types de problème ils peuvent résoudre et comment choisir sa librairie de parsing.
 
----
-V1
-Les parsers sont des outils permettant d'analyser une chaine de caractères pour la transformer en code utilisable par nos logiciels. 
-Au cours de cette présentation, vous découvrirez en quoi les parsers peuvent vous être utile, et comment choisir la librairie qui est la plus adaptée à vos besoins. 
-Que vous soyez noyé dans les regexs, ou que vous soyez simplement curieux, venez découvrir le monde merveilleux du parsing
 
 
 ------
@@ -17,6 +14,6 @@ Que vous soyez noyé dans les regexs, ou que vous soyez simplement curieux, vene
 
 
 
-La pré-version des slides est disponible ici: https://blemoine.github.io/parser-prez/#/ .
+La version "beta" des slides est disponibles ici: https://blemoine.github.io/parser-prez/#/
 
-Je suis a la 3eme implémentation (dont 2 dans le cadre professionnel) de parser que je fais en 3 ans, et le sujet semble toujours aussi obscur aux gens à qui j'en parle. Il me semble donc pertinent d'essayer de démystifier ce sujet.
+J'ai eu besoin d'écrire 3 parsers dans des technologies différentes durant ces 3 dernières années, et la compléxité des concepts associés me semble mériter une présentation d'ordre générale, sans parler de techno particulière.
