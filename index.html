@@ -198,7 +198,9 @@
           <ul>
             <li class="fragment">Code Postaux au Canada</li>
             <li class="fragment"><code class="bordered">K1A 0B1</code> ou <code class="bordered">H0H 0H0</code></li>
-            <li class="fragment"><code class="bordered">[A-CEGHJ-NP-TVXY][0-9][A-CEGHJ-NP-TVXY] [0-9][A-CEGHJ-NP-TVXY][0-9]</code></li>
+            <li class="fragment">
+              <code class="bordered">[A-CEGHJ-NP-TVXY][0-9][A-CEGHJ-NP-TVXY] [0-9][A-CEGHJ-NP-TVXY][0-9]</code>
+            </li>
           </ul>
         </section>
 
@@ -365,10 +367,10 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
 
           <ul>
             <li class="fragment">Le parser s'arrete t'il a la première erreur&nbsp;?</li>
-            <li class="fragment">Le parser remonte t'il des informations pertinentes (ce qu'il a vu, ce qu'il attendait)</li>
+            <li class="fragment">
+              Le parser remonte t'il des informations pertinentes (ce qu'il a vu, ce qu'il attendait)
+            </li>
           </ul>
-
-
         </section>
 
         <section>
@@ -397,13 +399,13 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
 
         <section>
           <h2>Examples</h2>
-          <p>Arithmetique simple: <br/>par ex. <code>3.0542 *2</code></p>
+          <p>Arithmetique simple: <br />par ex. <code>3.0542 *2</code></p>
         </section>
 
         <section>
           <h2>Example: Nearley</h2>
           <h3 style="font-size: 75%">Earley pour JavaScript, actions intégrées.</h3>
-          <pre ><code style="font-size: 90%" data-trim>
+          <pre><code style="font-size: 90%" data-trim>
 expr -> expr __ "*" __ expr {% ([e1,,,, e2]) => e1*e2 %}
         | float
 
@@ -422,7 +424,7 @@ __ -> " ":*
         <section>
           <h2>Example: ANTLR</h2>
           <h3 style="font-size: 75%">LL(*), visitor</h3>
-          <pre ><code style="font-size: 90%" data-trim>
+          <pre><code style="font-size: 90%" data-trim>
 expr: expr '*' expr | FLOAT;
 
 FLOAT: '-'? INT ('.' [0-9] +)?;
@@ -444,14 +446,13 @@ class Visitor extends ArithmeticVisitor {
   }
 }
           </code></pre>
-
         </section>
 
         <section>
           <h2>Autres fonctionnalités...</h2>
           <ul>
             <li class="fragment">
-              Rails<br>
+              Rails<br />
               <img alt="rail diagram" src="img/object.png" style="background: white" />
             </li>
             <li class="fragment">Outillage de debug/test</li>
@@ -476,7 +477,9 @@ class Visitor extends ArithmeticVisitor {
           <ul>
             <li class="fragment">Tester les !</li>
             <li class="fragment">Si simple et performance ne compte pas, <strong>parser combinator</strong></li>
-            <li class="fragment">Si moins simple ou que les perfs sont importantes, <strong>parser generator</strong></li>
+            <li class="fragment">
+              Si moins simple ou que les perfs sont importantes, <strong>parser generator</strong>
+            </li>
             <li class="fragment" style="font-size: 155%">Se focaliser sur la maintenabilité</li>
           </ul>
         </section>
@@ -493,6 +496,23 @@ class Visitor extends ArithmeticVisitor {
             <li>LR et Earley sans ambiguités</li>
             <li>Earley > LR > LL en terme de langages pouvant être parsé</li>
           </ul>
+        </section>
+
+        <section>
+          <h2>Polish /Reverse Polish notation</h2>
+          <div>
+            <code>1 + 2 * 3</code>
+          </div>
+          <div style="display: flex; align-items: top;justify-content: space-around">
+            <div class="fragment">
+              <div>Polish</div>
+              <code style="font-size: 63%">['+', 1, ['*', 2, 3]]</code>
+            </div>
+            <div class="fragment">
+              <div>Reverse Polish</div>
+              <code style="font-size: 63%">[1, [2, 3, '*'], '+']</code>
+            </div>
+          </div>
         </section>
       </div>
     </div>
