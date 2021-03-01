@@ -56,10 +56,9 @@
           <ul style="display:inline-block;width:600px;vertical-align:top;position:relative;">
             <li>Benoît Lemoine</li>
             <li>
-              Développeur Fullstack <br />(TypeScript / Scala) <br />chez <a href="http://www.mnubo.com">Mnubo</a> à
-              Décathlon
+              Développeur Fullstack <br />chez Décathlon à Montréal
             </li>
-	    <li><a href="https://community.decathlon.com/">https://community.decathlon.com/</a></li>
+	          <li><a href="https://community.decathlon.com/">https://community.decathlon.com/</a></li>
             <li><a href="https://twitter.com/benoit_lemoine">@benoit_lemoine</a></li>
           </ul>
           <img
@@ -81,13 +80,20 @@
 -->
         <section>
           <h2>Qu'est qu'un parser&nbsp;?</h2>
-          <code class="fragment">String -> Concrete Syntax Tree </code>
+          <div class="fragment">
+            <code>String -> Concrete Syntax Tree </code>
+            <br/>
+            aka CST
+            <br/> 
+            aka Parse Tree
+          </div>
+          
         </section>
 
         <section>
           <h2>Example</h2>
           <div>
-            <code>1 + 2 * 3</code>
+            <code>'1 + 2 * 3'</code>
           </div>
           <div style="display: flex; align-items: top;justify-content: space-around">
             <div class="fragment">
@@ -159,7 +165,7 @@
         </section>
 
         <section>
-          <h2>Quels cas d'utilisations?&nbsp&nbsp;?</h2>
+          <h2>Quels cas d'utilisations&nbsp;?</h2>
           <ul>
             <li class="fragment">Faire des formules <em>à la excel</em></li>
             <li class="fragment">
