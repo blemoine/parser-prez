@@ -362,18 +362,28 @@
 
         <section>
           <h2>Parsimmon</h2>
-          <h3 style="font-size: 75%">Parser de subset de JSON</h3>
-          <pre><code data-trim class="javascript">
-const __ = P.optWhitespace;
-const Null = P.string('null').result(null);
-const String = P.regexp(/"([^\0-\x1F\x22\x5C]*)"/, 1);
-const Number = P.regexp(/-?[1-9]*[0-9]+(\.[0-9]+)?/)
-                .map((str) => parseFloat(str));
-const Array = P.sepBy(P.lazy(() => Json),
-                      P.string(',').trim(__))
-               .wrap(P.string('[').skip(__),
-                     __.then(P.string(']')));
-const Json = P.alt(Null, Number, String, Array).wrap(__, __);
+          <pre><code data-trim class="javascript" style="max-height:500px;line-height: 24px;">
+const OpeningTag = P.regex(/\[([a-z][a-z])\]/i, 1)
+  .map(tag => tag.toLowerCase())
+  .desc("Opening tag [XX]");
+
+const ClosingTag = lang =>
+  P.regex(new RegExp(`\\[/${lang}\\]`, "i"))
+  .desc(`Closing tag [/${lang}]`);
+
+const Language = OpeningTag.chain(lang =>
+  P.regex(new RegExp(`.*?(?=\\[/${lang}\\])`, "i"))
+    .map(text => [lang, text])
+    .skip(ClosingTag(lang))
+    .desc(`Content finishing with [/${lang}]`)
+);
+
+const Languages = Language.sepBy(P.optWhitespace)
+ .map(pairs =>
+   pairs.reduce((acc, [lang, text]) => {
+     return ({ ...acc, [lang]: text }), {})
+   })
+ );
           </code></pre>
         </section>
 
@@ -385,9 +395,9 @@ const Json = P.alt(Null, Number, String, Array).wrap(__, __);
                 >, en particulier si on connait la programmation fonctionnelle</span
               >
             </li>
-              <li class="fragment"><code>+</code> "Facile" à debugger</li>
+            <li class="fragment"><code>+</code> "Facile" à debugger</li>
             <li class="fragment"><code>+</code> Pas d'étape de build intermédiaire</li>
-
+            <li class="fragment"><code>~</code>Mix AST et CST</li>
             <li class="fragment"><code>-</code> Mauvaises performances</li>
             <li class="fragment"><code>-</code> Non portable</li>
           </ul>

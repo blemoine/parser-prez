@@ -1,36 +1,20 @@
 const P = require("parsimmon");
 
-const OpeningTag = P.string("[")
-  .then(P.regex(/[a-z][a-z]/i))
-  .skip(P.string("]"))
+const OpeningTag = P.regex(/\[([a-z][a-z])\]/i, 1)
   .map(tag => tag.toLowerCase())
   .desc("Opening tag [XX]");
-const ClosingTag = lang =>
-  P.string("[/")
-    .then(P.regex(new RegExp(lang, "i")))
-    .skip(P.string("]"))
-    .desc(`Closing tag [/${lang}]`);
+const ClosingTag = lang => P.regex(new RegExp(`\\[/${lang}\\]`, "i")).desc(`Closing tag [/${lang}]`);
+const Language = OpeningTag.chain(lang =>
+  P.regex(new RegExp(`.*?(?=\\[/${lang}\\])`, "i"))
+    .map(text => [lang, text])
+    .skip(ClosingTag(lang))
+    .desc(`Content finishing with [/${lang}]`)
+);
 
-const language = {
-  Language() {
-    return OpeningTag.chain(lang => {
-      const closingTag = ClosingTag(lang);
-
-      return P.regex(new RegExp(`.*?(?=\\[/${lang}\\])`, "i"))
-        .map(text => [lang, text])
-        .skip(closingTag)
-        .desc(`Content finishing with [/${lang}]`);
-    });
-  },
-  Languages(r) {
-    return r.Language.sepBy(P.optWhitespace).map(pairs => {
-      return pairs.reduce((acc, [lang, text]) => ({ ...acc, [lang]: text }), {});
-    });
-  }
-};
-
-const lexer = P.createLanguage(language);
+const Languages = Language.sepBy(P.optWhitespace).map(pairs =>
+  pairs.reduce((acc, [lang, text]) => ({ ...acc, [lang]: text }), {})
+);
 
 module.exports = function parse(program) {
-  return lexer.Languages.tryParse(program);
+  return Languages.tryParse(program);
 };
