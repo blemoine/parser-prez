@@ -6,15 +6,19 @@
   "scripts": {
     "build:nearley": "rm -rf src/jsonEarley.js && nearleyc src/jsonEarley.ne -o src/jsonEarley.js",
     "build:peg": "rm -rf src/parser-peg.js && pegjs ./src/parser-peg.pegjs",
-    "build:antlr": "rm -rf src/antlr4 &&  java -jar $HOME/lib/antlr-4.7.2-complete.jar -Dlanguage=JavaScript -visitor -o src/antlr4 src/jsonAntlr.g4",
+    "build:antlr": "rm -rf src/antlr4 &&  java -jar $HOME/lib/antlr-4.9.1-complete.jar -Dlanguage=JavaScript -visitor -o src/antlr4 src/jsonAntlr.g4",
     "build": "npm run build:peg && npm run build:antlr && npm run build:nearley",
     "test": "npm run build && jest"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "jest": "^24.8.0",
-    "prettier": "^1.18.2"
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.9",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "prettier": "^1.19.1"
   },
   "dependencies": {
     "antlr4": "^4.7.2",

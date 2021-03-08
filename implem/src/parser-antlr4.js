@@ -1,8 +1,8 @@
 const antlr4 = require('antlr4/index');
 
-const JsonAntlrParser = require('./antlr4/src/jsonAntlrParser').jsonAntlrParser;
-const JsonAntlrLexer = require('./antlr4/src/jsonAntlrLexer').jsonAntlrLexer;
-const JsonAntlrVisitor = require('./antlr4/src/jsonAntlrVisitor').jsonAntlrVisitor;
+const JsonAntlrParser = require('./antlr4/src/jsonAntlrParser').default;
+const JsonAntlrLexer = require('./antlr4/src/jsonAntlrLexer').default;
+const JsonAntlrVisitor = require('./antlr4/src/jsonAntlrVisitor').default;
 
 module.exports = function parse(program) {
   const chars = new antlr4.InputStream(program);

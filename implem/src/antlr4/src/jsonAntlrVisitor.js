@@ -1,70 +1,64 @@
-// Generated from src/jsonAntlr.g4 by ANTLR 4.7.2
+// Generated from src/jsonAntlr.g4 by ANTLR 4.9.1
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4';
 
 // This class defines a complete generic visitor for a parse tree produced by jsonAntlrParser.
 
-function jsonAntlrVisitor() {
-	antlr4.tree.ParseTreeVisitor.call(this);
-	return this;
+export default class jsonAntlrVisitor extends antlr4.tree.ParseTreeVisitor {
+
+	// Visit a parse tree produced by jsonAntlrParser#json.
+	visitJson(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#object.
+	visitObject(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#member.
+	visitMember(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#array.
+	visitArray(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#value.
+	visitValue(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#number.
+	visitNumber(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#string.
+	visitString(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#bool.
+	visitBool(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by jsonAntlrParser#nullValue.
+	visitNullValue(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+
 }
-
-jsonAntlrVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
-jsonAntlrVisitor.prototype.constructor = jsonAntlrVisitor;
-
-// Visit a parse tree produced by jsonAntlrParser#json.
-jsonAntlrVisitor.prototype.visitJson = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#object.
-jsonAntlrVisitor.prototype.visitObject = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#member.
-jsonAntlrVisitor.prototype.visitMember = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#array.
-jsonAntlrVisitor.prototype.visitArray = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#value.
-jsonAntlrVisitor.prototype.visitValue = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#number.
-jsonAntlrVisitor.prototype.visitNumber = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#string.
-jsonAntlrVisitor.prototype.visitString = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#bool.
-jsonAntlrVisitor.prototype.visitBool = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by jsonAntlrParser#nullValue.
-jsonAntlrVisitor.prototype.visitNullValue = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-
-exports.jsonAntlrVisitor = jsonAntlrVisitor;
