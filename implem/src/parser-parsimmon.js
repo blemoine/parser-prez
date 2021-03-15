@@ -1,19 +1,12 @@
 const P = require("parsimmon");
 
-const OpeningTag = P.regex(/\[([a-z][a-z])\]/i, 1)
-  .map(tag => tag.toLowerCase())
-  .desc("Opening tag [XX]");
-const ClosingTag = lang => P.regex(new RegExp(`\\[/${lang}\\]`, "i")).desc(`Closing tag [/${lang}]`);
-const Language = OpeningTag.chain(lang =>
-  P.regex(new RegExp(`.*?(?=\\[/${lang}\\])`, "i"))
-    .map(text => [lang, text])
-    .skip(ClosingTag(lang))
-    .desc(`Content finishing with [/${lang}]`)
+const OpeningTag = P.regex(/\[([a-z][a-z])\]/i, 1).desc("Opening tag [XX]");
+const ClosingTag = P.regex(/\[\/([a-z][a-z])\]/i, 1).desc("Closing tag [XX]");
+const Language = OpeningTag.chain(opening =>
+  P.regex(/.*?(?=\[)/).chain(text => ClosingTag.map(closing => [opening, text, closing]))
 );
 
-const Languages = Language.sepBy(P.optWhitespace).map(pairs =>
-  pairs.reduce((acc, [lang, text]) => ({ ...acc, [lang]: text }), {})
-);
+const Languages = Language.sepBy(P.optWhitespace);
 
 module.exports = function parse(program) {
   return Languages.tryParse(program);

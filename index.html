@@ -334,8 +334,14 @@
             <pre><code data-trim>
  [en]I'm in english[/en]   [fr]Je suis en francais[/fr]
             </code></pre>
-            
-            <p class="fragment">Exemple de langage régulier MAIS compliqué a parser avec des regexps</p>
+            <pre><code data-trim>
+// What we expect
+[
+   ["en", ["I'm in english", "en"]],
+   ["fr", ["Je suis en francais", "fr"]]
+]
+            </code></pre>
+            <p class="fragment">Si les balises _doivent_ etre eéquilibré -> language contextuel</p>
         </section>
 
         <section>
@@ -360,6 +366,7 @@
           </ul>
         </section>
 
+          <!--
         <section>
           <h2>Parsimmon</h2>
           <pre><code data-trim class="javascript" style="max-height:500px;line-height: 24px;">
@@ -386,7 +393,7 @@ const Languages = Language.sepBy(P.optWhitespace)
  );
           </code></pre>
         </section>
-
+-->
         <section>
           <h2>Parser combinator</h2>
           <ul style="list-style: none">
@@ -395,7 +402,7 @@ const Languages = Language.sepBy(P.optWhitespace)
                 >, en particulier si on connait la programmation fonctionnelle</span
               >
             </li>
-            <li class="fragment"><code>+</code> "Facile" à debugger</li>
+            n<li class="fragment"><code>+</code> "Facile" à debugger</li>
             <li class="fragment"><code>+</code> Pas d'étape de build intermédiaire</li>
             <li class="fragment"><code>~</code>Mix AST et CST</li>
             <li class="fragment"><code>-</code> Mauvaises performances</li>
