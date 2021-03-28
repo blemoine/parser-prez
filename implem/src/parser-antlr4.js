@@ -1,8 +1,8 @@
-const antlr4 = require('antlr4/index');
+const antlr4 = require("antlr4/index");
 
-const JsonAntlrParser = require('./antlr4/src/jsonAntlrParser').default;
-const JsonAntlrLexer = require('./antlr4/src/jsonAntlrLexer').default;
-const JsonAntlrVisitor = require('./antlr4/src/jsonAntlrVisitor').default;
+const JsonAntlrParser = require("./antlr4/src/jsonAntlrParser").default;
+const JsonAntlrLexer = require("./antlr4/src/jsonAntlrLexer").default;
+const JsonAntlrVisitor = require("./antlr4/src/jsonAntlrVisitor").default;
 
 module.exports = function parse(program) {
   const chars = new antlr4.InputStream(program);
@@ -13,7 +13,7 @@ module.exports = function parse(program) {
 
   parser.buildParseTrees = true;
 
-  const tree = parser.json();
+  const tree = parser.languages();
 
   const result = tree.accept(new Visitor());
 
@@ -21,6 +21,25 @@ module.exports = function parse(program) {
 };
 
 class Visitor extends JsonAntlrVisitor {
+  visitLanguages(ctx) {
+    return super.visitLanguages(ctx);
+  }
+  visitOpenAndCloseTag(ctx) {
+    return super.visitOpenAndCloseTag(ctx);
+  }
+
+  visitClosingTag(ctx) {
+    return ctx.getText().slice(2, -1);
+  }
+  visitOpeningTag(ctx) {
+    return ctx.getText().slice(1, -1);
+  }
+
+  visitText(ctx) {
+    return ctx.getText();
+  }
+
+  /*
   visitJson(ctx) {
     return ctx.children[0].children[0].accept(this);
   }
@@ -57,4 +76,5 @@ class Visitor extends JsonAntlrVisitor {
       return { ...acc, [key]: value };
     }, {});
   }
+  */
 }

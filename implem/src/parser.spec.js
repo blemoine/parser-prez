@@ -1,18 +1,18 @@
 const data = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
 const parsers = require('./parser');
 
-[ /*'parsimmon' */,  'nearley', /*'antlr4', 'peg',  'chevrotain'*/].forEach((parserType) => {
+[ /*'parsimmon',  'nearley', */'antlr4', /* 'peg',  'chevrotain'*/].forEach((parserType) => {
   const parse = parsers(parserType);
   describe(`parser ${parserType}`, () => {
     it('should parse a simple tag', () => {
-      console.log(parse('[en]In English[/en]'));
       expect(parse('[en]In English[/en]')).toEqual([['en', 'In English', 'en']]);
     });
+
     it('should parse multiple tags', () => {
       console.log(JSON.stringify(parse('[fr]Francais[/fr][en]In English[/en]')));
       expect(parse('[fr]Francais[/fr][en]In English[/en]')).toEqual([['fr', 'Francais', 'fr'], ['en', 'In English', 'en']]);
     });
-    /*
+/*
     it('should parse multiple tags being case insensitive', () => {
       expect(parse('[En]In English[/eN][fr]Francais[/FR]')).toEqual({ fr: 'Francais', en: 'In English' });
     });

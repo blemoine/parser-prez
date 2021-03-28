@@ -6,56 +6,32 @@ import antlr4 from 'antlr4';
 
 export default class jsonAntlrVisitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by jsonAntlrParser#json.
-	visitJson(ctx) {
+	// Visit a parse tree produced by jsonAntlrParser#languages.
+	visitLanguages(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by jsonAntlrParser#object.
-	visitObject(ctx) {
+	// Visit a parse tree produced by jsonAntlrParser#openAndCloseTag.
+	visitOpenAndCloseTag(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by jsonAntlrParser#member.
-	visitMember(ctx) {
+	// Visit a parse tree produced by jsonAntlrParser#openingTag.
+	visitOpeningTag(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by jsonAntlrParser#array.
-	visitArray(ctx) {
+	// Visit a parse tree produced by jsonAntlrParser#closingTag.
+	visitClosingTag(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by jsonAntlrParser#value.
-	visitValue(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by jsonAntlrParser#number.
-	visitNumber(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by jsonAntlrParser#string.
-	visitString(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by jsonAntlrParser#bool.
-	visitBool(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by jsonAntlrParser#nullValue.
-	visitNullValue(ctx) {
+	// Visit a parse tree produced by jsonAntlrParser#text.
+	visitText(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

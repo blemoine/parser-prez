@@ -1,30 +1,14 @@
-
 grammar jsonAntlr;
 
-json: value;
-
-object: '{' member (',' member)* '}' | '{' '}';
-member: string ':' value;
-
-array: '[' value (',' value)* ']' | '[' ']';
-
-value: object |  array | number | bool | nullValue  | string ;
-
-number: NUMBER;
-string: STRING;
-bool: 'true' | 'false';
-nullValue: 'null';
+languages: openAndCloseTag (openAndCloseTag)* ;
+openAndCloseTag: openingTag text closingTag ;
+openingTag: OPENING_TAG ;
+closingTag: CLOSING_TAG ;
+text: TEXT ;
 
 
-
-NUMBER: '-'? INT ('.' DIGIT +)?;
-fragment INT: '0' | [1-9] DIGIT*;
-
-STRING   : '"' (ESC | SAFECODEPOINT)* '"'   ;
-fragment DIGIT: [0-9];
-fragment ESC   : '\\' (["\\/bfnrt] | UNICODE)   ;
-fragment UNICODE   : 'u' HEX HEX HEX HEX   ;
-fragment HEX   : [0-9a-fA-F]   ;
-fragment SAFECODEPOINT   : ~ ["\\\u0000-\u001F]   ;
-
-WHITESPACE :  [ \t\n\r] + -> skip ;
+OPENING_TAG: '[' [a-zA-Z] [a-zA-Z] ']' ;
+CLOSING_TAG: '[/' [a-zA-Z] [a-zA-Z] ']' ;
+TEXT: CHAR+ ;
+fragment CHAR: ~'[' ;
+WHITESPACE :  [ \t\n\r]+ -> skip ;

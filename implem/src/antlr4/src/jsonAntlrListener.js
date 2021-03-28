@@ -5,84 +5,48 @@ import antlr4 from 'antlr4';
 // This class defines a complete listener for a parse tree produced by jsonAntlrParser.
 export default class jsonAntlrListener extends antlr4.tree.ParseTreeListener {
 
-	// Enter a parse tree produced by jsonAntlrParser#json.
-	enterJson(ctx) {
+	// Enter a parse tree produced by jsonAntlrParser#languages.
+	enterLanguages(ctx) {
 	}
 
-	// Exit a parse tree produced by jsonAntlrParser#json.
-	exitJson(ctx) {
-	}
-
-
-	// Enter a parse tree produced by jsonAntlrParser#object.
-	enterObject(ctx) {
-	}
-
-	// Exit a parse tree produced by jsonAntlrParser#object.
-	exitObject(ctx) {
+	// Exit a parse tree produced by jsonAntlrParser#languages.
+	exitLanguages(ctx) {
 	}
 
 
-	// Enter a parse tree produced by jsonAntlrParser#member.
-	enterMember(ctx) {
+	// Enter a parse tree produced by jsonAntlrParser#openAndCloseTag.
+	enterOpenAndCloseTag(ctx) {
 	}
 
-	// Exit a parse tree produced by jsonAntlrParser#member.
-	exitMember(ctx) {
-	}
-
-
-	// Enter a parse tree produced by jsonAntlrParser#array.
-	enterArray(ctx) {
-	}
-
-	// Exit a parse tree produced by jsonAntlrParser#array.
-	exitArray(ctx) {
+	// Exit a parse tree produced by jsonAntlrParser#openAndCloseTag.
+	exitOpenAndCloseTag(ctx) {
 	}
 
 
-	// Enter a parse tree produced by jsonAntlrParser#value.
-	enterValue(ctx) {
+	// Enter a parse tree produced by jsonAntlrParser#openingTag.
+	enterOpeningTag(ctx) {
 	}
 
-	// Exit a parse tree produced by jsonAntlrParser#value.
-	exitValue(ctx) {
-	}
-
-
-	// Enter a parse tree produced by jsonAntlrParser#number.
-	enterNumber(ctx) {
-	}
-
-	// Exit a parse tree produced by jsonAntlrParser#number.
-	exitNumber(ctx) {
+	// Exit a parse tree produced by jsonAntlrParser#openingTag.
+	exitOpeningTag(ctx) {
 	}
 
 
-	// Enter a parse tree produced by jsonAntlrParser#string.
-	enterString(ctx) {
+	// Enter a parse tree produced by jsonAntlrParser#closingTag.
+	enterClosingTag(ctx) {
 	}
 
-	// Exit a parse tree produced by jsonAntlrParser#string.
-	exitString(ctx) {
-	}
-
-
-	// Enter a parse tree produced by jsonAntlrParser#bool.
-	enterBool(ctx) {
-	}
-
-	// Exit a parse tree produced by jsonAntlrParser#bool.
-	exitBool(ctx) {
+	// Exit a parse tree produced by jsonAntlrParser#closingTag.
+	exitClosingTag(ctx) {
 	}
 
 
-	// Enter a parse tree produced by jsonAntlrParser#nullValue.
-	enterNullValue(ctx) {
+	// Enter a parse tree produced by jsonAntlrParser#text.
+	enterText(ctx) {
 	}
 
-	// Exit a parse tree produced by jsonAntlrParser#nullValue.
-	exitNullValue(ctx) {
+	// Exit a parse tree produced by jsonAntlrParser#text.
+	exitText(ctx) {
 	}
 
 
