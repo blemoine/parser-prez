@@ -130,35 +130,23 @@
         <section>
           <h2>Concrete Syntax Tree&nbsp;?</h2>
 
-          <p>CST aka Parse Tree</p>
+          <p class="fragment">
+            CST aka Parse Tree <br />
+            Représentation sous forme d'arbre d'une expression
+          </p>
 
-          <p class="fragment">Représentation sous forme d'arbre d'une expression</p>
-
-          <h2 class="fragment">Abstract Syntax Tree</h2>
-
-          <p class="fragment">Représentation des parties <em>signifiantes</em> de l'expression</p>
-        </section>
-
-        <section>
-          <h2>Example</h2>
-          <div>
-            <code>2 * 3</code>
-          </div>
-          <div style="display: flex; justify-content: space-around">
-            <div>
-              <div id="tree-cst" style="height: 400px; width: 430px;  padding: 10px;border: 1px solid white;"></div>
-            </div>
-            <div>
-              <div id="tree-ast" style="height: 400px; width: 430px;  padding: 10px; border: 1px solid white;"></div>
-            </div>
-          </div>
           <div class="fragment">
-            <div>Serializée</div>
-            <code style="font-size: 63%; border: 1px solid white;padding:10px 0;"
-            >Expression(Number(2),Operator('*'),Number(3))</code
-            >
-            <code style="font-size: 63%; border: 1px solid white;padding:10px 0;">multiply(2,3)</code>
+            <pre><code class="javascript">1 + 2 * 3</code></pre>
+            <div style="display:flex;justify-content: center;">
+              <div id="tree-cst" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid white;"></div>
+            </div>
           </div>
+          <pre
+            class="fragment"
+          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid white;padding:10px;"
+            >Expression(Number(1), Operator('+'), Expression(Number(2), Operator('*'), Number(3)))</code
+          ></pre>
+
           <script>
             const cstChartConfig = {
               chart: {
@@ -176,20 +164,61 @@
                 children: [
                   {
                     text: { name: 'Number' },
-                    children: [{ text: '2' }],
+                    children: [{ text: '1' }],
                   },
                   {
                     text: { name: 'Op' },
-                    children: [{ text: '*' }],
+                    children: [{ text: '+' }],
                   },
                   {
-                    text: { name: 'Number' },
-                    children: [{ text: '3' }],
+                    text: { name: 'Expression' },
+                    children: [
+                      {
+                        text: { name: 'Number' },
+                        children: [{ text: '2' }],
+                      },
+                      {
+                        text: { name: 'Op' },
+                        children: [{ text: '*' }],
+                      },
+                      {
+                        text: { name: 'Number' },
+                        children: [{ text: '3' }],
+                      },
+                    ],
                   },
                 ],
               },
             };
 
+            setTimeout(() => {
+              new Treant(cstChartConfig);
+            }, 500);
+          </script>
+        </section>
+
+        <section>
+          <h2>Abstract Syntax Tree</h2>
+
+          <p class="fragment">
+            AST <br />
+            Représentation des parties <em>signifiantes</em> de l'expression
+          </p>
+
+          <div class="fragment">
+            <pre><code class="javascript">1 + 2 * 3</code></pre>
+            <div style="display:flex;justify-content: center;">
+              <div id="tree-ast" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid white;"></div>
+            </div>
+          </div>
+
+          <pre
+            class="fragment"
+          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid white;padding:10px;"
+          >add(1, multiply(2, 3))</code
+          ></pre>
+
+          <script>
             const astChartConfig = {
               chart: {
                 container: '#tree-ast',
@@ -202,26 +231,31 @@
               },
 
               nodeStructure: {
-                text: { name: 'multiply' },
+                text: { name: 'add' },
                 children: [
                   {
-                    text: { name: '2' },
+                    text: { name: '1' },
                   },
                   {
-                    text: { name: '3' },
+                    text: { name: 'multiply' },
+                    children: [
+                      {
+                        text: { name: '2' },
+                      },
+                      {
+                        text: { name: '3' },
+                      },
+                    ],
                   },
                 ],
               },
             };
 
             setTimeout(() => {
-              new Treant(cstChartConfig);
               new Treant(astChartConfig);
             }, 500);
           </script>
         </section>
-
-        
 
         <section>
           <h2>Pour un AST plusieurs CST</h2>
@@ -229,25 +263,25 @@
           <ul>
             <li>
               2 * 3
-              <code style="font-size: 63%; border: 1px solid white;padding:10px 0;"
+              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
                 >Expr(Number(2),Operator('*'),Number(3))</code
               >
             </li>
             <li class="fragment">
               * 2 3
-              <code style="font-size: 63%; border: 1px solid white;padding:10px 0;"
+              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
                 >Expr(Operator('*'), Number(2),Number(3))</code
               >
             </li>
             <li class="fragment">
               2 3 *
-              <code style="font-size: 63%; border: 1px solid white;padding:10px 0;"
+              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
                 >Expr(Number(2),Number(3), Operator('*'))</code
               >
             </li>
             <li class="fragment">
               two times three
-              <code style="font-size: 63%; border: 1px solid white;padding:10px 0;"
+              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
                 >Expr(Number('two'),Operator('times'),Number('three'))</code
               >
             </li>
