@@ -68,7 +68,7 @@
           <ul style="display:inline-block;width:600px;vertical-align:top;position:relative;">
             <li>Benoît Lemoine</li>
             <li>Développeur Fullstack <br />chez Décathlon à Montréal</li>
-            <li><a href="https://community.decathlon.com/">https://community.decathlon.com</a></li>
+            <li><a href="https://activities.decathlon.ca/">https://activities.decathlon.ca</a></li>
             <li><a href="https://twitter.com/benoit_lemoine">@benoit_lemoine</a></li>
           </ul>
           <img
@@ -148,52 +148,7 @@
           ></pre>
 
           <script>
-            const cstChartConfig = {
-              chart: {
-                container: '#tree-cst',
-                connectors: {
-                  type: 'straight',
-                  style: {
-                    stroke: 'white',
-                  },
-                },
-              },
 
-              nodeStructure: {
-                text: { name: 'Expression' },
-                children: [
-                  {
-                    text: { name: 'Number' },
-                    children: [{ text: '1' }],
-                  },
-                  {
-                    text: { name: 'Op' },
-                    children: [{ text: '+' }],
-                  },
-                  {
-                    text: { name: 'Expression' },
-                    children: [
-                      {
-                        text: { name: 'Number' },
-                        children: [{ text: '2' }],
-                      },
-                      {
-                        text: { name: 'Op' },
-                        children: [{ text: '*' }],
-                      },
-                      {
-                        text: { name: 'Number' },
-                        children: [{ text: '3' }],
-                      },
-                    ],
-                  },
-                ],
-              },
-            };
-
-            setTimeout(() => {
-              new Treant(cstChartConfig);
-            }, 500);
           </script>
         </section>
 
@@ -219,41 +174,7 @@
           ></pre>
 
           <script>
-            const astChartConfig = {
-              chart: {
-                container: '#tree-ast',
-                connectors: {
-                  type: 'straight',
-                  style: {
-                    stroke: 'white',
-                  },
-                },
-              },
 
-              nodeStructure: {
-                text: { name: 'add' },
-                children: [
-                  {
-                    text: { name: '1' },
-                  },
-                  {
-                    text: { name: 'multiply' },
-                    children: [
-                      {
-                        text: { name: '2' },
-                      },
-                      {
-                        text: { name: '3' },
-                      },
-                    ],
-                  },
-                ],
-              },
-            };
-
-            setTimeout(() => {
-              new Treant(astChartConfig);
-            }, 500);
           </script>
         </section>
 
@@ -835,6 +756,89 @@ const Languages = Language.sepBy(P.optWhitespace)
           { src: 'plugin/notes/notes.js', async: true },
           { src: 'plugin/highlight/highlight.js', async: true },
         ],
+      });
+
+      const astChartConfig = {
+        chart: {
+          container: '#tree-ast',
+          connectors: {
+            type: 'straight',
+            style: {
+              stroke: 'white',
+            },
+          },
+        },
+
+        nodeStructure: {
+          text: { name: 'add' },
+          children: [
+            {
+              text: { name: '1' },
+            },
+            {
+              text: { name: 'multiply' },
+              children: [
+                {
+                  text: { name: '2' },
+                },
+                {
+                  text: { name: '3' },
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      Reveal.addEventListener('slidechanged', (event) => {
+        new Treant(astChartConfig);
+      });
+
+      const cstChartConfig = {
+        chart: {
+          container: '#tree-cst',
+          connectors: {
+            type: 'straight',
+            style: {
+              stroke: 'white',
+            },
+          },
+        },
+
+        nodeStructure: {
+          text: { name: 'Expression' },
+          children: [
+            {
+              text: { name: 'Number' },
+              children: [{ text: '1' }],
+            },
+            {
+              text: { name: 'Op' },
+              children: [{ text: '+' }],
+            },
+            {
+              text: { name: 'Expression' },
+              children: [
+                {
+                  text: { name: 'Number' },
+                  children: [{ text: '2' }],
+                },
+                {
+                  text: { name: 'Op' },
+                  children: [{ text: '*' }],
+                },
+                {
+                  text: { name: 'Number' },
+                  children: [{ text: '3' }],
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      Reveal.addEventListener('slidechanged', (event) => {
+        new Treant(cstChartConfig);
       });
     </script>
   </body>
