@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/theme/white.css" />
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css" />
@@ -30,7 +30,7 @@
     <style>
       .svg-tree {
         padding: 10px;
-        border: 1px solid white;
+        border: 1px solid black;
       }
       .svg-tree .svg-text {
         fill: white;
@@ -41,8 +41,8 @@
       }
 
       code.bordered {
-        border: 1px solid white;
-        background-color: #252525;
+        border: 1px solid black;
+        background-color: #e5e5e5;
         padding: 2px 5px;
       }
 
@@ -66,16 +66,20 @@
 
         <section>
           <h2>Qui suis-je&nbsp;?</h2>
-          <ul style="display:inline-block;width:600px;vertical-align:top;position:relative;">
+          <ul style="display:inline-block;vertical-align:top;position:relative;">
             <li>Benoît Lemoine</li>
-              <li>
-                    Développeur Fullstack <br />(TS, Scala, Rust, ...) <br />
-                    aimant la programmation fonctionnelle <br />cherchant actuellement un emploi à Montréal
-                </li>
+            <li>Développeur Fullstack <br />(TS, Scala, Rust, ...) chez <a href="https://www.busbud.com">BusBud</a></li>
+
+            <li>
+              Co-Organisateur <a href="https://www.meetup.com/typescript-montreal/">Montreal TypeScript meetup</a>
+            </li>
+            <li>
+              <a href="https://lemoine-benoit.medium.com/">https://lemoine-benoit.medium.com/</a>
+            </li>
             <li><a href="https://twitter.com/benoit_lemoine">@benoit_lemoine</a></li>
           </ul>
           <img
-            style="display:inline-block;width:250px; vertical-align:top;"
+            style="display:inline-block;width:100px; vertical-align:top;"
             src="img/Moloch.png"
             alt="Plus bel animal du monde, le Moloch"
           />
@@ -141,18 +145,16 @@
           <div class="fragment">
             <pre><code class="javascript">1 + 2 * 3</code></pre>
             <div style="display:flex;justify-content: center;">
-              <div id="tree-cst" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid white;"></div>
+              <div id="tree-cst" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid black;"></div>
             </div>
           </div>
           <pre
             class="fragment"
-          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid white;padding:10px;"
+          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
             >Expression(Number(1), Operator('+'), Expression(Number(2), Operator('*'), Number(3)))</code
           ></pre>
 
-          <script>
-
-          </script>
+          <script></script>
         </section>
 
         <section>
@@ -166,19 +168,17 @@
           <div class="fragment">
             <pre><code class="javascript">1 + 2 * 3</code></pre>
             <div style="display:flex;justify-content: center;">
-              <div id="tree-ast" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid white;"></div>
+              <div id="tree-ast" style="height: 320px; width: 830px;  padding: 10px;border: 1px solid black;"></div>
             </div>
           </div>
 
           <pre
             class="fragment"
-          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid white;padding:10px;"
+          ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
           >add(1, multiply(2, 3))</code
           ></pre>
 
-          <script>
-
-          </script>
+          <script></script>
         </section>
 
         <section>
@@ -187,25 +187,25 @@
           <ul>
             <li>
               2 * 3
-              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
+              <code style="font-size: 63%; border: 1px solid black;padding:10px;"
                 >Expr(Number(2),Operator('*'),Number(3))</code
               >
             </li>
             <li class="fragment">
               * 2 3
-              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
+              <code style="font-size: 63%; border: 1px solid black;padding:10px;"
                 >Expr(Operator('*'), Number(2),Number(3))</code
               >
             </li>
             <li class="fragment">
               2 3 *
-              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
+              <code style="font-size: 63%; border: 1px solid black;padding:10px;"
                 >Expr(Number(2),Number(3), Operator('*'))</code
               >
             </li>
             <li class="fragment">
               two times three
-              <code style="font-size: 63%; border: 1px solid white;padding:10px;"
+              <code style="font-size: 63%; border: 1px solid black;padding:10px;"
                 >Expr(Number('two'),Operator('times'),Number('three'))</code
               >
             </li>
@@ -217,22 +217,6 @@
           <h2>Syntaxe <code>!=</code> Sémantique</h2>
           <code>let x: boolean = 23;</code>
         </section>
-
-        <!--
-        <section>
-          <h2>Quels cas d'utilisations&nbsp;?</h2>
-          <ul>
-            <li class="fragment">Faire des formules <em>à la excel</em></li>
-            <li class="fragment">
-              Supporter un sous/sur ensemble d'un langage existant (e.g. JSON avec commentaires)
-            </li>
-            <li class="fragment">Interface Utilisateur permettant de saisir des commandes (e.g. chat)</li>
-            <li class="fragment">Valider (et simplifier) un fichier de configuration</li>
-            <li class="fragment">Créer son propre DSL (sql, markdown, coffeescript, ...)</li>
-            <li class="fragment">etc.</li>
-          </ul>
-        </section>
-        -->
 
         <section>
           <h2>Comment implémenter un parser&nbsp;?</h2>
@@ -250,20 +234,22 @@
         </section>
 
         <section>
-          <h2>Machine Learning et NLP</h2>
-          <ul>
-            <li class="fragment"><code>1 + 2</code> ?</li>
-            <li class="fragment"><code>2.987432</code> avec une probabilité de 98%</li>
-            <li class="fragment">
-              L'imprécision sur la grammaire d'entrée entraîne une imprécision sur le résultat de sortie
-            </li>
-          </ul>
+          <h2>Disgression sur la notion de langage formel</h2>
+          // Ici on parle de parser un langage _formel_. // Un langage _Sans ambiguités_ ( mais... pas toujours, add
+          asterisque) // Le metier de développeur c'est justement de traduire du langage non formel - langage naturel -
+          en langage formel - le code. // Un parser ca transforme un langage formel en un autre langage formel.
         </section>
 
         <section>
-          <h2>hiérarchie de langage de Chomsky</h2>
+          <h2>Chat GPT peut il parser mon texte?</h2>
+          // Montrer l'exemple foireux
+        </section>
+
+        <section>
+          <h2>Hiérarchie de langage de Chomsky</h2>
           <p>
-            Langage : ensemble de <em>mots</em> construits à partir d'un alphabet et respectant des régles de grammaire
+            Langage&nbsp;: ensemble de <em>mots</em> construits à partir d'un alphabet et respectant des régles de
+            grammaire
           </p>
           <img src="img/Hierarchie_chomsky.png" alt="hierarchie chomsky" style="height: 300px; background: white" />
           <aside class="notes">
@@ -668,6 +654,12 @@ class Visitor extends ArithmeticVisitor {
 -->
 
         <section>
+          <h2>Un 2eme mot sur l'AI</h2>
+          Peut par contre aider grandement a écrire le parser! _Mais_ faite bien attention a écrire un maximum de cas de
+          test, car comme le code est complexe, l'AI peut introduire des erreurs que vous aurrez du mal à détecter
+        </section>
+
+        <section>
           <h2>Conclusion</h2>
           <h3 style="font-size: 75%">Avez vous besoin d'un parser&nbsp;?</h3>
 
@@ -773,7 +765,7 @@ const Languages = Language.sepBy(P.optWhitespace)
           connectors: {
             type: 'straight',
             style: {
-              stroke: 'white',
+              stroke: 'black',
             },
           },
         },
@@ -809,7 +801,7 @@ const Languages = Language.sepBy(P.optWhitespace)
           connectors: {
             type: 'straight',
             style: {
-              stroke: 'white',
+              stroke: 'black',
             },
           },
         },
