@@ -84,99 +84,36 @@
             alt="Plus bel animal du monde, le Moloch"
           />
         </section>
-
+        <!--
         <section>
-          <h2>Le PO a une super idée!</h2>
-          <p>
-            En tant qu'utilisateur, je veux écrire des formules <em>à la excel</em> pour manipuler le tableau de données
-            dans l'application
-          </p>
-          <img
-            src="img/application.png"
-            alt="Screenshot d'application avec une table et un input pour écrire un formule"
-            style="width: 400px"
-          />
-        </section>
-        <section>
-          <h2>Le PO donne du détail</h2>
-
+          <h2>Qu'est qu'un DSL&nbsp;?</h2>
           <ul>
-            <li class="fragment">Colonne sont référencé par leur nom avec un <code>$</code></li>
-            <li class="fragment">Les fonctions <code>SUM</code> et <code>PRODUCT</code> sont supportées</li>
+            <li><strong>D</strong>omain <strong>S</strong>pecific <strong>L</strong>anguage</li>
+            <li class="fragment">Language spécialisé pour un domaine applicatif</li>
+            <li class="fragment">Respecte une grammaire - régles permettant de valider si un énoncé est correct</li>
+            <li class="fragment">Par ex: SQL, markdown</li>
+          </ul>
+        </section>
+-->
+
+        <section>
+          <h2>À quoi sert un parser&nbsp;?</h2>
+          <p class="fragment">À exploiter du texte brut</p>
+          <p class="fragment"><em>Mais pas n'importe quel texte</em></p>
+          <p class="fragment">À exploiter un texte brut écrit en langage formel</p>
+        </section>
+
+        <section>
+          <h2>À quoi sert un developer&nbsp;?</h2>
+          <p class="fragment">À transformer du langage naturel en langage formel</p>
+        </section>
+
+        <section>
+          <h2>Pourquoi&nbsp;?</h2>
+          <ul>
             <li class="fragment">
-              L'arithmetique de base (<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>) est supporté
+              Faire des formules <em>à la excel</em> <code class="bordered small-text">$COL1 + $COL2</code>
             </li>
-          </ul>
-          <div class="fragment">ex. <code class="bordered">SUM($TPS) + PRODUCT($TVQ)</code></div>
-        </section>
-
-        <section>
-          <h2>ChatGPT?</h2>
-          <pre><code data-trim>
-Answer only with the result, give no explanation.
-
-Given the following JSON data
-```
- {
-   "header": ["Produit", "Prix ($CAD)", "TVQ", "TPS"],
-   "rows": [
-     ["Reblochon", "40", "3.99", "2"],
-     ["Oeufs", "4", "0", "0"],
-     ["Hotel", "100", "9.98", "5"]
-   ]
-}
-```
-Give the result of the formula `SUM($TPS)`
-         </code></pre>
-          <pre class="fragment"><code >7</code></pre>
-          <div class="fragment">Ca fonctionne! Ca y est story implémentée!</div>
-        </section>
-
-        <section>
-          <h2>Est ce que ca fonctionne?</h2>
-          <pre><code data-trim>
-Answer only with the result, give no explanation.
-
-Given the following JSON data
-```
-{
-  "header": ["Produit", "Prix ($CAD)", "TVQ", "TPS"],
-  "rows": [
-    ["Reblochon", "40", "3.99", "2345678"],
-    ["Oeufs", "4", "0", "0"],
-    ["Hotel", "100", "9.98", "987654321"]
-  ]
-}
-```
-Give the result of the formula `SUM($TPS)`
-
-        </code></pre>
-          <pre class="fragment"><code >987657999</code></pre>
-          <div class="fragment">Le vrai résultat est <code class="bordered">989999999</code></div>
-        </section>
-
-        <section>
-          <h2>Langage formel</h2>
-          <ul>
-            <li class="fragment">Un alphabet</li>
-            <li class="fragment">Des règles pour combiner les symboles et former des mots</li>
-            <li class="fragment">Il n'y a pas d'ambiguités<sup>*</sup></li>
-          </ul>
-          TODO examples
-        </section>
-
-        <section>
-          <h2>Donc pourquoi ca ne fonctionne pas&nbsp;?</h2>
-          <ul>
-            <li>ChatGPT est outil qui transforme du langage non formel en langage non formel.</li>
-            <li class="fragment">Un parser transforme un langage formel en un autre langage formel</li>
-            <li class="fragment">Un developer est un humain qui transforme du langage non formel en langage formel.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Autres exemples de cas d'usage pour parsers</h2>
-          <ul>
             <li class="fragment">
               Supporter un sous/sur ensemble d'un langage existant
               <code class="bordered small-text">{"name": "Georges" /* JSON with comments */}</code>
@@ -195,14 +132,13 @@ Give the result of the formula `SUM($TPS)`
           </ul>
         </section>
 
-
         <section>
           <h2>Qu'est qu'un parser, en pratique&nbsp;?</h2>
 
           <code class="bordered"
-          ><span class="fragment">String</span> <span class="fragment" data-fragment-index="1">=></span>
+            ><span class="fragment">String</span> <span class="fragment" data-fragment-index="1">=></span>
             <span class="fragment">Concrete Syntax Tree</span></code
-          ><sup>*</sup>
+          >
         </section>
 
         <section>
@@ -220,9 +156,9 @@ Give the result of the formula `SUM($TPS)`
             </div>
           </div>
           <pre
-                  class="fragment"
+            class="fragment"
           ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
-          >Expression(Number(1), Operator('+'), Expression(Number(2), Operator('*'), Number(3)))</code
+            >Expression(Number(1), Operator('+'), Expression(Number(2), Operator('*'), Number(3)))</code
           ></pre>
 
           <script></script>
@@ -244,7 +180,7 @@ Give the result of the formula `SUM($TPS)`
           </div>
 
           <pre
-                  class="fragment"
+            class="fragment"
           ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
           >add(1, multiply(2, 3))</code
           ></pre>
@@ -259,37 +195,35 @@ Give the result of the formula `SUM($TPS)`
             <li>
               2 * 3
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number(2),Operator('*'),Number(3))</code
+                >Expr(Number(2),Operator('*'),Number(3))</code
               >
             </li>
             <li class="fragment">
               * 2 3
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Operator('*'), Number(2),Number(3))</code
+                >Expr(Operator('*'), Number(2),Number(3))</code
               >
             </li>
             <li class="fragment">
               2 3 *
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number(2),Number(3), Operator('*'))</code
+                >Expr(Number(2),Number(3), Operator('*'))</code
               >
             </li>
             <li class="fragment">
               two times three
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number('two'),Operator('times'),Number('three'))</code
+                >Expr(Number('two'),Operator('times'),Number('three'))</code
               >
             </li>
             <li class="fragment">etc.</li>
           </ul>
         </section>
 
-
         <section>
           <h2>Syntaxe <code>!=</code> Sémantique</h2>
           <code>let x: boolean = 23;</code>
         </section>
-
 
         <section>
           <h2>Comment implémenter un parser&nbsp;?</h2>
@@ -304,6 +238,23 @@ Give the result of the formula `SUM($TPS)`
             <li class="fragment">Difficulté à valider les entrées <code>=></code> problémes de sécurité</li>
             <li class="fragment">Limitation des grammaires possibles</li>
           </ul>
+        </section>
+
+        <section>
+          <h2>Langage formel?</h2>
+          <ul>
+            <li></li>
+          </ul>
+
+          Disgression sur la notion de langage formel
+          // Ici on parle de parser un langage _formel_. // Un langage _Sans ambiguités_ ( mais... pas toujours, add
+          asterisque) // Le metier de développeur c'est justement de traduire du langage non formel - langage naturel -
+          en langage formel - le code. // Un parser ca transforme un langage formel en un autre langage formel.
+        </section>
+
+        <section>
+          <h2>Chat GPT peut il parser mon texte?</h2>
+          // Montrer l'exemple foireux
         </section>
 
         <section>
@@ -353,9 +304,9 @@ Give the result of the formula `SUM($TPS)`
           <h2>PAS DE REGEX POUR LES LANGAGES NON CONTEXTUEL</h2>
 
           <a
-                  class="fragment"
-                  style="font-size: 31px"
-                  href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"
+            class="fragment"
+            style="font-size: 31px"
+            href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"
           >
             a mere glimpse of the world of reg​ex parsers for HTML will ins​tantly transport a programmer's
             consciousness into a world of ceaseless screaming,... HTML tags lea͠ki̧n͘g fr̶ǫm ̡yo​͟ur eye͢s̸ ̛l̕ik͏e liq​uid pain,
@@ -451,8 +402,8 @@ const Languages = Language.sepBy(P.optWhitespace)
           <ul style="list-style: none">
             <li class="fragment">
               <code>+</code> Bonne maintenabilité<span class="fragment"
-            >, en particulier si on connait la programmation fonctionnelle</span
-            >
+                >, en particulier si on connait la programmation fonctionnelle</span
+              >
             </li>
 
             <li class="fragment"><code>+</code> "Facile" à debugger</li>
@@ -654,8 +605,8 @@ class Visitor extends LangAntlrVisitor {
             <li>Earley</li>
           </ul>
           <div
-                  class="fragment"
-                  style="position:absolute; top:140px; color: #C00; font-size: 8rem;transform: rotate(-45deg); left: 0;"
+            class="fragment"
+            style="position:absolute; top:140px; color: #C00; font-size: 8rem;transform: rotate(-45deg); left: 0;"
           >
             On s'en moque
           </div>
@@ -715,9 +666,7 @@ class Visitor extends ArithmeticVisitor {
 -->
 
         <section>
-          <h2>ChatGPT n'est pas un parser</h2>
-          <h3 class="fragment">Mais il peut écrire le parser</h3>
-          TODO
+          <h2>Un 2eme mot sur l'AI</h2>
           Peut par contre aider grandement a écrire le parser! _Mais_ faite bien attention a écrire un maximum de cas de
           test, car comme le code est complexe, l'AI peut introduire des erreurs que vous aurrez du mal à détecter
         </section>
@@ -747,6 +696,60 @@ class Visitor extends ArithmeticVisitor {
 
         <section>
           <h2>Questions&nbsp;?</h2>
+        </section>
+
+        <section>
+          <h2>Famille de grammaire</h2>
+          <h3>Si vous voulez <em>vraiment</em> savoir</h3>
+          <ul>
+            <li>LR et Earley et PEG supporte la récursion a gauche<sup>*</sup></li>
+            <li>LR et Earley sans ambiguités</li>
+            <li>Earley > LR > LL en terme de langages pouvant être parsé</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Non Context Free - Parsimmon</h2>
+          <pre><code data-trim class="javascript" style="max-height:500px;line-height: 24px;">
+const OpeningTag = P.regex(/\[([a-z][a-z])\]/i, 1)
+  .map(tag => tag.toLowerCase())
+  .desc("Opening tag [XX]");
+
+const ClosingTag = lang =>
+  P.regex(new RegExp(`\\[/${lang}\\]`, "i"))
+  .desc(`Closing tag [/${lang}]`);
+
+const Language = OpeningTag.chain(lang =>
+  P.regex(new RegExp(`.*?(?=\\[/${lang}\\])`, "i"))
+    .map(text => [lang, text])
+    .skip(ClosingTag(lang))
+    .desc(`Content finishing with [/${lang}]`)
+);
+
+const Languages = Language.sepBy(P.optWhitespace)
+ .map(pairs =>
+   pairs.reduce((acc, [lang, text]) => {
+     return ({ ...acc, [lang]: text }), {})
+   })
+ );
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Polish /Reverse Polish notation</h2>
+          <div>
+            <code>1 + 2 * 3</code>
+          </div>
+          <div style="display: flex; align-items: top;justify-content: space-around">
+            <div class="fragment">
+              <div>Polish</div>
+              <code style="font-size: 63%">['+', 1, ['*', 2, 3]]</code>
+            </div>
+            <div class="fragment">
+              <div>Reverse Polish</div>
+              <code style="font-size: 63%">[1, [2, 3, '*'], '+']</code>
+            </div>
+          </div>
         </section>
       </div>
     </div>
