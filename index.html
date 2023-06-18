@@ -53,6 +53,42 @@
       .Treant p {
         margin: 0;
       }
+
+      .background {
+        width: 190px;
+        height: 80px;
+        padding: 0;
+        margin: 0;
+      }
+
+      .line {
+        width: 200px;
+        height: 74px;
+        border-bottom: 1px solid #333;
+        transform: translateY(-20px) translateX(5px) rotate(27deg);
+        position: absolute;
+        z-index: -1;
+      }
+
+      .background > div {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 1px;
+        left: 1px;
+      }
+
+      .top {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+      }
     </style>
   </head>
   <body>
@@ -97,6 +133,7 @@
             style="width: 400px"
           />
         </section>
+        <!--
         <section>
           <h2>Le PO donne du détail</h2>
 
@@ -109,6 +146,7 @@
           </ul>
           <div class="fragment">ex. <code class="bordered">SUM($TPS) + PRODUCT($TVQ)</code></div>
         </section>
+        -->
 
         <section>
           <h2>ChatGPT?</h2>
@@ -118,7 +156,7 @@ Answer only with the result, give no explanation.
 Given the following JSON data
 ```
  {
-   "header": ["Produit", "Prix ($CAD)", "TVQ", "TPS"],
+   "header": ["Produit", "Prix", "TVQ", "TPS"],
    "rows": [
      ["Reblochon", "40", "3.99", "2"],
      ["Oeufs", "4", "0", "0"],
@@ -140,7 +178,7 @@ Answer only with the result, give no explanation.
 Given the following JSON data
 ```
 {
-  "header": ["Produit", "Prix ($CAD)", "TVQ", "TPS"],
+  "header": ["Produit", "Prix", "TVQ", "TPS"],
   "rows": [
     ["Reblochon", "40", "3.99", "2345678"],
     ["Oeufs", "4", "0", "0"],
@@ -155,7 +193,7 @@ Give the result of the formula `SUM($TPS)`
           <div class="fragment">Le vrai résultat est <code class="bordered">989999999</code></div>
         </section>
 
-        <section>
+        <!--<section>
           <h2>Langage formel</h2>
           <ul>
             <li class="fragment">Un alphabet</li>
@@ -163,15 +201,37 @@ Give the result of the formula `SUM($TPS)`
             <li class="fragment">Il n'y a pas d'ambiguités<sup>*</sup></li>
           </ul>
           TODO examples
-        </section>
+        </section>-->
 
         <section>
-          <h2>Donc pourquoi ca ne fonctionne pas&nbsp;?</h2>
-          <ul>
-            <li>ChatGPT est outil qui transforme du langage non formel en langage non formel.</li>
-            <li class="fragment">Un parser transforme un langage formel en un autre langage formel</li>
-            <li class="fragment">Un developer est un humain qui transforme du langage non formel en langage formel.</li>
-          </ul>
+          <h2>Pourquoi ca ne fonctionne pas&nbsp;?</h2>
+          <table>
+            <thead>
+              <tr>
+                <th class="background">
+                  <div>
+                    <span class="bottom">To</span>
+                    <span class="top">From</span>
+                    <div class="line"></div>
+                  </div>
+                </th>
+                <th>Langage naturel</th>
+                <th>Langage formel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Langage naturel</th>
+                <td><span class="fragment" data-fragment-index="1">ChatGpt</span></td>
+                <td><span class="fragment" data-fragment-index="2">ChatGpt</span></td>
+              </tr>
+              <tr>
+                <th>Langage formel</th>
+                <td><span class="fragment" data-fragment-index="4">Développeur</span></td>
+                <td><span class="fragment" data-fragment-index="3">Parser</span></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
         <section>
@@ -195,12 +255,11 @@ Give the result of the formula `SUM($TPS)`
           </ul>
         </section>
 
-
         <section>
           <h2>Qu'est qu'un parser, en pratique&nbsp;?</h2>
 
           <code class="bordered"
-          ><span class="fragment">String</span> <span class="fragment" data-fragment-index="1">=></span>
+            ><span class="fragment">String</span> <span class="fragment" data-fragment-index="1">=></span>
             <span class="fragment">Concrete Syntax Tree</span></code
           ><sup>*</sup>
         </section>
@@ -220,7 +279,7 @@ Give the result of the formula `SUM($TPS)`
             </div>
           </div>
           <pre
-                  class="fragment"
+            class="fragment"
           ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
           >Expression(Number(1), Operator('+'), Expression(Number(2), Operator('*'), Number(3)))</code
           ></pre>
@@ -244,7 +303,7 @@ Give the result of the formula `SUM($TPS)`
           </div>
 
           <pre
-                  class="fragment"
+            class="fragment"
           ><code class="javascript" data-trim style="font-size: 63%; border: 1px solid black;padding:10px;"
           >add(1, multiply(2, 3))</code
           ></pre>
@@ -259,37 +318,35 @@ Give the result of the formula `SUM($TPS)`
             <li>
               2 * 3
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number(2),Operator('*'),Number(3))</code
+                >Expr(Number(2),Operator('*'),Number(3))</code
               >
             </li>
             <li class="fragment">
               * 2 3
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Operator('*'), Number(2),Number(3))</code
+                >Expr(Operator('*'), Number(2),Number(3))</code
               >
             </li>
             <li class="fragment">
               2 3 *
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number(2),Number(3), Operator('*'))</code
+                >Expr(Number(2),Number(3), Operator('*'))</code
               >
             </li>
             <li class="fragment">
               two times three
               <code style="font-size: 63%; border: 1px solid black;padding:10px;"
-              >Expr(Number('two'),Operator('times'),Number('three'))</code
+                >Expr(Number('two'),Operator('times'),Number('three'))</code
               >
             </li>
             <li class="fragment">etc.</li>
           </ul>
         </section>
 
-
         <section>
           <h2>Syntaxe <code>!=</code> Sémantique</h2>
           <code>let x: boolean = 23;</code>
         </section>
-
 
         <section>
           <h2>Comment implémenter un parser&nbsp;?</h2>
@@ -308,10 +365,7 @@ Give the result of the formula `SUM($TPS)`
 
         <section>
           <h2>Hiérarchie de langage de Chomsky</h2>
-          <p>
-            Langage&nbsp;: ensemble de <em>mots</em> construits à partir d'un alphabet et respectant des régles de
-            grammaire
-          </p>
+
           <img src="img/Hierarchie_chomsky.png" alt="hierarchie chomsky" style="height: 300px; background: white" />
           <aside class="notes">
             - language régulier: peut etre traité par un machine a état finie! - recursive mais la définition
@@ -353,16 +407,13 @@ Give the result of the formula `SUM($TPS)`
           <h2>PAS DE REGEX POUR LES LANGAGES NON CONTEXTUEL</h2>
 
           <a
-                  class="fragment"
-                  style="font-size: 31px"
-                  href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"
+            class="fragment"
+            style="font-size: 31px"
+            href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"
           >
             a mere glimpse of the world of reg​ex parsers for HTML will ins​tantly transport a programmer's
-            consciousness into a world of ceaseless screaming,... HTML tags lea͠ki̧n͘g fr̶ǫm ̡yo​͟ur eye͢s̸ ̛l̕ik͏e liq​uid pain,
-            the song of re̸gular exp​ression parsing will exti​nguish the voices of mor​tal man from the sp​here I can
-            see it can you see ̲͚̖͔̙î̩́t̲͎̩̱͔́̋̀ it is beautiful t​he final snuffing of the lie​s of Man ALL IS LOŚ͖̩͇̗̪̏̈́T ALL I​S LOST the
-            pon̷y he comes he c̶̮omes he comes the ich​or permeates all MY FACE MY FACE ᵒh god no NO NOO̼O​O NΘ stop the
-            an​*̶͑̾̾​̅ͫ͏̙̤g͇̫͛͆̾ͫ̑͆l͖͉̗̩̳̟̍ͫͥͨe̠̅s ͎a̧͈͖r̽̾̈́͒͑e n​ot rè̑ͧ̌aͨl̘̝̙̃ͤ͂̾̆ ZA̡͊͠͝LGΌ ISͮ̂҉̯͈͕̹̘̱ TO͇̹̺ͅƝ̴ȳ̳ TH̘Ë͖́̉ ͠P̯͍̭O̚​N̐Y̡ H̸̡̪̯ͨ͊̽̅̾̎Ȩ̬̩̾͛ͪ̈́̀́͘ ̶̧̨̱̹̭̯ͧ̾ͬC̷̙̲̝͖ͭ̏ͥͮ͟Oͮ͏̮̪̝͍M̲̖͊̒ͪͩͬ̚̚͜Ȇ̴̟̟͙̞ͩ͌͝S̨̥̫͎̭ͯ̿̔̀ͅ
+            consciousness into a world of ceaseless screaming, (...) ᵒh god no NO NOO̼O​O NΘ stop the an​*̶͑̾̾​̅ͫ͏̙̤g͇̫͛͆̾ͫ̑͆l͖͉̗̩̳̟̍ͫͥͨe̠̅s ͎a̧͈͖r̽̾̈́͒͑e n​ot
+            rè̑ͧ̌aͨl̘̝̙̃ͤ͂̾̆ ZA̡͊͠͝LGΌ ISͮ̂҉̯͈͕̹̘̱ TO͇̹̺ͅƝ̴ȳ̳ TH̘Ë͖́̉ ͠P̯͍̭O̚​N̐Y̡ H̸̡̪̯ͨ͊̽̅̾̎Ȩ̬̩̾͛ͪ̈́̀́͘ ̶̧̨̱̹̭̯ͧ̾ͬC̷̙̲̝͖ͭ̏ͥͮ͟Oͮ͏̮̪̝͍M̲̖͊̒ͪͩͬ̚̚͜Ȇ̴̟̟͙̞ͩ͌͝S̨̥̫͎̭ͯ̿̔̀ͅ
           </a>
         </section>
 
@@ -451,8 +502,8 @@ const Languages = Language.sepBy(P.optWhitespace)
           <ul style="list-style: none">
             <li class="fragment">
               <code>+</code> Bonne maintenabilité<span class="fragment"
-            >, en particulier si on connait la programmation fonctionnelle</span
-            >
+                >, en particulier si on connait la programmation fonctionnelle</span
+              >
             </li>
 
             <li class="fragment"><code>+</code> "Facile" à debugger</li>
@@ -611,6 +662,7 @@ class Visitor extends LangAntlrVisitor {
           </code></pre>
         </section>
 
+        <!--
         <section>
           <h2>Error handling</h2>
 
@@ -621,6 +673,7 @@ class Visitor extends LangAntlrVisitor {
             </li>
           </ul>
         </section>
+        -->
 
         <section>
           <h2>Autres fonctionnalités...</h2>
@@ -654,8 +707,8 @@ class Visitor extends LangAntlrVisitor {
             <li>Earley</li>
           </ul>
           <div
-                  class="fragment"
-                  style="position:absolute; top:140px; color: #C00; font-size: 8rem;transform: rotate(-45deg); left: 0;"
+            class="fragment"
+            style="position:absolute; top:140px; color: #C00; font-size: 8rem;transform: rotate(-45deg); left: 0;"
           >
             On s'en moque
           </div>
@@ -717,9 +770,43 @@ class Visitor extends ArithmeticVisitor {
         <section>
           <h2>ChatGPT n'est pas un parser</h2>
           <h3 class="fragment">Mais il peut écrire le parser</h3>
-          TODO
-          Peut par contre aider grandement a écrire le parser! _Mais_ faite bien attention a écrire un maximum de cas de
-          test, car comme le code est complexe, l'AI peut introduire des erreurs que vous aurrez du mal à détecter
+          <pre class="fragment"><code data-trim>
+Act as a TypeScript expert.
+Answer only with code, don't give any explanation.
+Create a parser based on the Parsimmon Library
+that can parse the language made of the following token:
+* opening tag starting with `[` ,
+  followed by 2 lowercase letters,
+  ending with `]`
+* closing tag starting with `[/`,
+  followed by 2 lowercase letters,
+  ending with `]`
+* an arbitrary text in between those 2 tags
+eg.
+`[en]a text[/en]    [fr]un texte[/fr]` should return
+`[ ['en', 'a text', 'en'], ['fr', 'un texte', 'fr']]`
+            </code></pre>
+        </section>
+
+        <section>
+          <h2>ChatGPT écrit un parser</h2>
+          <pre><code data-trim class="javascript">
+import * as P from 'parsimmon';
+const openingTag = P.string('[')
+                    .then(P.regex(/[a-z]{2}/))
+                    .skip(P.string(']'));
+const closingTag = P.string('[/')
+                    .then(P.regex(/[a-z]{2}/))
+                    .skip(P.string(']'));
+const text = P.takeWhile(c => c !== '[');
+const tagParser = openingTag.chain(opening => {
+  return text.chain(content => {
+    return closingTag.map(closing => {
+      return [opening, content, closing];
+    });
+  });
+});
+              </code></pre>
         </section>
 
         <section>
